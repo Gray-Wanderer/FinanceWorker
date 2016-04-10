@@ -1,0 +1,59 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+
+repositories {
+    mavenCentral()
+}
+
+def httpclientGAV = [group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.2']
+def hsqlGAV = [group: 'org.hsqldb', name: 'hsqldb', version: '2.3.1']
+
+idea {
+    module {
+        //and some extra dirs that should be excluded by IDEA
+        excludeDirs += file('build')
+        excludeDirs += file('gradle')
+        excludeDirs += file('out')
+        excludeDirs += file('deploy')
+    }
+}
+
+dependencies {
+    compile httpclientGAV
+    compile hsqlGAV
+    testCompile 'junit:junit:4.12'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+        resources {
+            srcDir 'resources'
+        }
+    }
+    test {
+        java {
+            srcDirs = ["tests"]
+        }
+    }
+}
+
+test {
+    scanForTestClasses = false
+    includes = ['**/*Test.class']
+    jvmArgs '-XX:-UseSplitVerifier'
+}
+
+task deploy(dependsOn: build) {
+    def appName = 'financeWorker'
+    project.copy {
+        from project.configurations.runtime
+        into "deploy/$appName/lib"
+    }
+    project.copy {
+        from project.libsDir
+        into "deploy/$appName"
+    }
+}
