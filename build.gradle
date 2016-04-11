@@ -9,6 +9,11 @@ def httpclientGAV = [group: 'org.apache.httpcomponents', name: 'httpclient', ver
 def hsqlGAV = [group: 'org.hsqldb', name: 'hsqldb', version: '2.3.1']
 
 idea {
+	project {
+		jdkName = '1.8'
+		languageLevel = '1.8'
+		vcs = 'Git'
+	}
     module {
         //and some extra dirs that should be excluded by IDEA
         excludeDirs += file('build')
