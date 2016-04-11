@@ -12,15 +12,20 @@ idea {
 	project {
 		jdkName = '1.8'
 		languageLevel = '1.8'
-		vcs = 'Git'
+        ipr {
+            withXml { provider ->
+                provider.node.component
+                        .find { it.@name == 'VcsDirectoryMappings' }
+                        .mapping.@vcs = 'Git'
+            }
+        }
+        module {
+            excludeDirs += file('build')
+            excludeDirs += file('gradle')
+            excludeDirs += file('out')
+            excludeDirs += file('deploy')
+        }
 	}
-    module {
-        //and some extra dirs that should be excluded by IDEA
-        excludeDirs += file('build')
-        excludeDirs += file('gradle')
-        excludeDirs += file('out')
-        excludeDirs += file('deploy')
-    }
 }
 
 dependencies {
