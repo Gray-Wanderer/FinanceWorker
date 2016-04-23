@@ -8,7 +8,6 @@ import org.junit.Assert;
  */
 public class CurrencyWorkerTest extends TestCase {
 
-
     CurrencyWorker currencyWorker = new CurrencyWorker();
     String usdCode = "R01235";
 

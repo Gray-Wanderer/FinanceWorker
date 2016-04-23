@@ -2,7 +2,6 @@ create table SYS_PROPERTIES (
 	ID varchar(36) not null,
 	NAME varchar(225) not null,
 	VALUE longvarchar,
-	EXCHANGE_RATE numeric,
 	-----
 	primary key (ID)
 )^
@@ -19,6 +18,7 @@ create table SYS_CURRENCY (
 
 create table DATA_CATEGORY (
 	ID varchar(36) not null,
+	CREATE_DATE timestamp,
 	NAME varchar(255),
 	-----
 	primary key (ID)
@@ -26,6 +26,7 @@ create table DATA_CATEGORY (
 
 create table DATA_OPERATION (
 	ID varchar(36) not null,
+	CREATE_DATE timestamp,
 	DATE_TS timestamp,
 	OPERATION_VALUE numeric,
 	DESCRIPTION varchar(255),
@@ -37,6 +38,7 @@ create table DATA_OPERATION (
 
 create table DATA_CONVERSION (
 	ID varchar(36) not null,
+	CREATE_DATE timestamp,
 	DATE_TS timestamp,
 	DESCRIPTION varchar(255),
 	CONVERSION_VALUE numeric,
