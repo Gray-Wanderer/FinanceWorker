@@ -1,5 +1,7 @@
 package com.mishunin.db.entities;
 
+import com.mishunin.db.entities.annotations.Column;
+
 import java.util.Date;
 
 /**
@@ -7,6 +9,7 @@ import java.util.Date;
  */
 public abstract class SafeEntity extends BaseEntity {
 
+    @Column("CREATE_DATE")
     private Date createDate;
 
     public Date getCreateDate() {

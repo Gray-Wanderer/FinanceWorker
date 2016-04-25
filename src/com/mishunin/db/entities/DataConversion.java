@@ -1,5 +1,8 @@
 package com.mishunin.db.entities;
 
+import com.mishunin.db.entities.annotations.Column;
+import com.mishunin.db.entities.annotations.EditableColumn;
+
 import java.util.Date;
 
 /**
@@ -7,11 +10,28 @@ import java.util.Date;
  */
 public class DataConversion extends SafeEntity {
 
+    @Column("DATE_TS")
+    @EditableColumn(sortOrder = 0)
     private Date dateTs;
+
+    @Column("DESCRIPTION")
+    @EditableColumn(sortOrder = 1)
     private String description;
+
+    @Column("CONVERSION_VALUE")
+    @EditableColumn(sortOrder = 2)
     private Double conversionValue;
+
+    @Column("CURRENCY_FROM_ID")
+    @EditableColumn(sortOrder = 3)
     private Currency fromCurrency;
+
+    @Column("CURRENCY_TO_ID")
+    @EditableColumn(sortOrder = 4)
     private Currency toCurrency;
+
+    @Column("EXCHANGE_RATE")
+    @EditableColumn(sortOrder = 5)
     private Double exchangeRate;
 
     public Date getDateTs() {
