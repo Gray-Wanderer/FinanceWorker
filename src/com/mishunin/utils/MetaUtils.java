@@ -1,5 +1,8 @@
 package com.mishunin.utils;
 
+import com.mishunin.db.entities.BaseEntity;
+import com.mishunin.db.entities.annotations.Entity;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +49,7 @@ public class MetaUtils {
     public static List<String> getAllGettersParamNames(Class clazz, Predicate<Method> predicate) {
         List<String> propNames = new ArrayList<>();
         getAllGetters(clazz, predicate).forEach(method -> {
-            String name = method.getName().replaceFirst("(get)|(is)", "");
+            String name = getGetterParamName(method);
             propNames.add(Character.toLowerCase(name.charAt(0)) + name.substring(1));
         });
         return propNames;
@@ -81,6 +84,30 @@ public class MetaUtils {
             }
         }
         return null;
+    }
+
+    public static Class findGetterReturnType(Class clazz,String paramName) {
+        Method getter = MetaUtils.findGetter(clazz, paramName);
+        return getter.getReturnType();
+    }
+
+    public static String getGetterParamName(Method method) {
+        return method.getName().replaceFirst("(get)|(is)", "");
+    }
+
+    public static String getTableName(Class<? extends BaseEntity> clazz) {
+        Entity entityAnnotation = clazz.getAnnotation(Entity.class);
+        if (entityAnnotation != null)
+            return entityAnnotation.tableName();
+        return null;
+    }
+
+    public static <T extends BaseEntity> T createNewEntity(Class<T> entityClass) {
+        try {
+            return entityClass.newInstance();
+        } catch (InstantiationException | IllegalAccessException ex) {
+            throw new RuntimeException("Impossible to create Entity class", ex);
+        }
     }
 
 }

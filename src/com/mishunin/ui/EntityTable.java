@@ -7,11 +7,14 @@ import javax.swing.table.AbstractTableModel;
  */
 public class EntityTable extends AbstractTableModel {
 
-    /** Объект данных */
+    /**
+     * Объект данных
+     */
     private DBObjectController dataObject = null;
 
     /**
      * Метод доступа
+     *
      * @param controller Объект данных
      */
     public void setDataObject(DBObjectController controller) {
@@ -21,19 +24,11 @@ public class EntityTable extends AbstractTableModel {
 
     /**
      * Метод доступа
+     *
      * @return Объект данных
      */
     public DBObjectController getDataObject() {
         return dataObject;
-    }
-
-    /**
-     * Метод доступа
-     * @param lss Объект данных
-     */
-    public void setStudentSession(DBObjectController lss) {
-        dataObject = lss;
-        fireTableStructureChanged();
     }
 
     @Override

@@ -45,4 +45,8 @@ public abstract class BaseEntity {
         }
         return null;
     }
+
+    public String getTableName() {
+        return MetaUtils.getTableName(this.getClass());
+    }
 }

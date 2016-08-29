@@ -1,3 +1,4 @@
+import com.mishunin.db.entities.*;
 import com.mishunin.utils.MetaUtils;
 import junit.framework.TestCase;
 import org.junit.Assert;
@@ -55,6 +56,19 @@ public class MetaUtilsTest extends TestCase {
         Assert.assertTrue(getterPropNames.contains("countValues"));
         Assert.assertTrue(getterPropNames.contains("enable"));
         Assert.assertTrue(!getterPropNames.contains("editableEntity"));
+    }
+
+    public void testTableNames() {
+        BaseEntity baseEntity = new Currency();
+        Assert.assertTrue("SYS_CURRENCY".equals(baseEntity.getTableName()));
+        baseEntity = new DataCategory();
+        Assert.assertTrue("DATA_CATEGORY".equals(baseEntity.getTableName()));
+        baseEntity = new DataConversion();
+        Assert.assertTrue("DATA_CONVERSION".equals(baseEntity.getTableName()));
+        baseEntity = new DataOperation();
+        Assert.assertTrue("DATA_OPERATION".equals(baseEntity.getTableName()));
+        baseEntity = new Property();
+        Assert.assertTrue("SYS_PROPERTIES".equals(baseEntity.getTableName()));
     }
 
 }

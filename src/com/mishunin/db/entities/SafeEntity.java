@@ -10,7 +10,7 @@ import java.util.Date;
 public abstract class SafeEntity extends BaseEntity {
 
     @Column("CREATE_DATE")
-    private Date createDate;
+    private Date createDate;  //todo move to BaseEntity, add delete_date
 
     public Date getCreateDate() {
         return createDate;
